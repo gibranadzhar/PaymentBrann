@@ -3,83 +3,89 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Payment Link - Tomura Store</title>
+    <title>Brann STORE - Payment</title>
     <style>
-        :root { --dana: #008ced; --gopay: #00aa13; --ovo: #4c2a86; --qris: #333; }
-        body { font-family: 'Segoe UI', sans-serif; background: #f0f2f5; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; padding: 20px; }
-        .card { width: 100%; max-width: 400px; background: white; padding: 25px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); text-align: center; box-sizing: border-box; }
-        .profile-img { width: 80px; height: 80px; border-radius: 50%; object-fit: cover; border: 3px solid #eee; }
+        :root { --dana: #008ced; --gopay: #00aa13; --ovo: #4c2a86; }
+        body { font-family: 'Segoe UI', sans-serif; background: #f4f7fa; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; padding: 20px; }
         
-        .amount-box { margin: 20px 0; text-align: left; }
-        label { font-size: 14px; color: #666; font-weight: bold; }
-        input[type="number"] { width: 100%; padding: 12px; margin-top: 5px; border: 2px solid #eee; border-radius: 10px; box-sizing: border-box; font-size: 18px; font-weight: bold; outline: none; }
-        input[type="number"]:focus { border-color: var(--dana); }
-
-        .qris-container { background: white; padding: 15px; border-radius: 15px; border: 2px solid #eee; margin-bottom: 20px; transition: 0.3s; }
-        .qris-container img { width: 200px; height: 200px; background: #eee; }
-        .qris-label { font-size: 12px; color: #888; margin-top: 10px; font-weight: bold; }
-
-        .btn { display: block; padding: 14px; margin-bottom: 10px; border: none; border-radius: 12px; color: white; font-weight: bold; cursor: pointer; width: 100%; font-size: 15px; text-decoration: none; }
-        .dana { background: var(--dana); }
-        .gopay { background: var(--gopay); }
-        .ovo { background: var(--ovo); }
+        .card { width: 100%; max-width: 380px; background: white; padding: 30px; border-radius: 30px; box-shadow: 0 20px 40px rgba(0,0,0,0.1); text-align: center; }
         
-        #toast { visibility: hidden; min-width: 200px; background-color: #333; color: #fff; text-align: center; border-radius: 10px; padding: 10px; position: fixed; z-index: 1; bottom: 30px; left: 50%; transform: translateX(-50%); }
+        /* Logo */
+        .profile-img { width: 100px; height: 100px; border-radius: 50%; object-fit: cover; border: 4px solid #fff; box-shadow: 0 5px 15px rgba(0,0,0,0.1); margin-bottom: 10px; }
+        
+        h2 { margin: 5px 0; color: #333; font-size: 24px; letter-spacing: -0.5px; }
+        .subtitle { color: #999; font-size: 13px; margin-bottom: 25px; }
+
+        /* QRIS Area */
+        .qris-box { background: #fff; border: 2px solid #f0f0f0; border-radius: 20px; padding: 15px; margin-bottom: 15px; position: relative; }
+        .qris-box img { width: 100%; border-radius: 10px; display: block; }
+        
+        .btn-download { display: inline-block; background: #333; color: white; padding: 12px 25px; border-radius: 50px; text-decoration: none; font-size: 14px; font-weight: bold; margin-bottom: 25px; transition: 0.3s; }
+        .btn-download:hover { background: #000; transform: translateY(-2px); }
+
+        /* Payment Buttons */
+        .payment-list { text-align: left; }
+        .list-label { font-size: 11px; font-weight: bold; color: #ccc; margin-bottom: 10px; display: block; text-transform: uppercase; letter-spacing: 1px; }
+
+        .copy-btn { display: flex; align-items: center; justify-content: space-between; padding: 14px 20px; margin-bottom: 12px; border: none; border-radius: 18px; color: white; font-weight: bold; cursor: pointer; width: 100%; transition: 0.2s; }
+        .copy-btn:active { transform: scale(0.96); }
+        .copy-btn span.name { font-size: 15px; }
+        .copy-btn span.action { font-size: 10px; background: rgba(255,255,255,0.25); padding: 5px 10px; border-radius: 10px; text-transform: uppercase; }
+
+        .dana { background: var(--dana); box-shadow: 0 4px 12px rgba(0,140,237,0.3); }
+        .gopay { background: var(--gopay); box-shadow: 0 4px 12px rgba(0,170,19,0.3); }
+        .ovo { background: var(--ovo); box-shadow: 0 4px 12px rgba(76,42,134,0.3); }
+
+        /* Toast Notification */
+        #toast { visibility: hidden; min-width: 220px; background: #222; color: #fff; text-align: center; border-radius: 50px; padding: 15px; position: fixed; bottom: 40px; left: 50%; transform: translateX(-50%); font-size: 14px; z-index: 100; box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
         #toast.show { visibility: visible; animation: fadein 0.5s; }
-        @keyframes fadein { from {bottom: 0; opacity: 0;} to {bottom: 30px; opacity: 1;} }
+        @keyframes fadein { from {bottom: 0; opacity: 0;} to {bottom: 40px; opacity: 1;} }
     </style>
 </head>
 <body>
 
 <div class="card">
-    <img src="https://via.placeholder.com/80" alt="Logo" class="profile-img">
-    <h2 style="margin: 10px 0;">Tomura Store</h2>
+    <img src="data:image/jpeg;base64,...(logo_data)..." alt="Brann Store" class="profile-img">
+    <h2>Brann STORE</h2>
+    <div class="subtitle">Pembayaran Cepat & Aman</div>
 
-    <div class="amount-box">
-        <label>Masukkan Nominal (Rp)</label>
-        <input type="number" id="nominal" placeholder="Contoh: 10000" oninput="updateQR()">
+    <div class="qris-box">
+        <img id="qrisImg" src="data:image/jpeg;base64,...(qris_data)..." alt="QRIS Brann Store">
+        <div style="margin-top:10px; font-size:11px; color:#555; font-weight:bold;">SCAN QRIS DI ATAS</div>
     </div>
 
-    <div class="qris-container" id="qrisContent">
-        <div id="qrcode">
-            <p style="color:#999; font-size: 14px; padding: 40px 0;">Masukkan nominal untuk<br>memunculkan QRIS</p>
-        </div>
-        <div class="qris-label" id="qrisStatus">MENUNGGU NOMINAL</div>
-    </div>
+    <a id="downloadBtn" href="#" download="QRIS-Brann-STORE.jpg" class="btn-download">
+        💾 Download QRIS
+    </a>
 
-    <button class="btn dana" onclick="copyNumber('083827963304', 'DANA')">Salin Nomor DANA</button>
-    <button class="btn gopay" onclick="copyNumber('083827963304', 'GoPay')">Salin Nomor GoPay</button>
-    <button class="btn ovo" onclick="copyNumber('083827963304', 'OVO')">Salin Nomor OVO</button>
+    <div class="payment-list">
+        <span class="list-label">Atau Salin Nomor HP</span>
+        <button class="copy-btn dana" onclick="copyNum('083827963304', 'DANA')">
+            <span class="name">DANA</span> <span class="action">Salin Nomor</span>
+        </button>
+        <button class="copy-btn gopay" onclick="copyNum('083827963304', 'GoPay')">
+            <span class="name">GoPay</span> <span class="action">Salin Nomor</span>
+        </button>
+        <button class="copy-btn ovo" onclick="copyNum('083827963304', 'OVO')">
+            <span class="name">OVO</span> <span class="action">Salin Nomor</span>
+        </button>
+    </div>
 </div>
 
-<div id="toast">Nomor Tersalin!</div>
+<div id="toast">Berhasil disalin!</div>
 
 <script>
-    function updateQR() {
-        const nominal = document.getElementById('nominal').value;
-        const qrContainer = document.getElementById('qrcode');
-        const status = document.getElementById('qrisStatus');
+    // Script untuk menangani download gambar
+    const qrisImg = document.getElementById('qrisImg');
+    const downloadBtn = document.getElementById('downloadBtn');
+    downloadBtn.href = qrisImg.src;
 
-        if (nominal > 0) {
-            // Kita menggunakan layanan API QR Generator untuk simulasi
-            // Catatan: Ini akan membuat QR berisi teks/instruksi pembayaran
-            qrContainer.innerHTML = `<img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=Pembayaran%20Tomura%20Store:%20Rp${nominal}" alt="QRIS">`;
-            status.innerText = "SILAKAN SCAN UNTUK BAYAR RP " + parseInt(nominal).toLocaleString('id-ID');
-            status.style.color = "green";
-        } else {
-            qrContainer.innerHTML = `<p style="color:#999; font-size: 14px; padding: 40px 0;">Masukkan nominal untuk<br>memunculkan QRIS</p>`;
-            status.innerText = "MENUNGGU NOMINAL";
-            status.style.color = "#888";
-        }
-    }
-
-    function copyNumber(number, p) {
-        navigator.clipboard.writeText(number).then(() => {
-            const t = document.getElementById("toast");
-            t.innerText = "Nomor " + p + " Berhasil Disalin!";
-            t.className = "show";
-            setTimeout(() => { t.className = t.className.replace("show", ""); }, 3000);
-        });
+    function copyNum(num, p) {
+        navigator.clipboard.writeText(num);
+        const t = document.getElementById("toast");
+        t.innerText = "Nomor " + p + " Berhasil Disalin!";
+        t.className = "show";
+        setTimeout(() => { t.className = ""; }, 3000);
     }
 </script>
 
