@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Link - Tomura Store</title>
+    <style>
+        :root {
+            --dana: #008ced;
+            --gopay: #00aa13;
+            --ovo: #4c2a86;
+        }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f0f2f5; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; }
+        .card { width: 90%; max-width: 400px; background: white; padding: 25px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); text-align: center; }
+        
+        /* Logo */
+        .profile-img { width: 90px; height: 90px; border-radius: 50%; object-fit: cover; border: 3px solid #eee; }
+        h2 { margin: 10px 0 5px; color: #333; }
+        
+        /* Input Nominal */
+        .amount-box { margin: 20px 0; text-align: left; }
+        label { font-size: 14px; color: #666; font-weight: bold; }
+        input[type="number"] { width: 100%; padding: 12px; margin-top: 5px; border: 2px solid #eee; border-radius: 10px; box-sizing: border-box; font-size: 16px; outline: none; transition: 0.3s; }
+        input[type="number"]:focus { border-color: var(--dana); }
+
+        /* QRIS Section */
+        .qris-container { background: #fafafa; padding: 15px; border-radius: 15px; border: 1px dashed #ccc; margin-bottom: 20px; }
+        .qris-container img { width: 100%; border-radius: 10px; }
+        .qris-label { font-size: 12px; color: #888; margin-top: 5px; font-weight: bold; }
+
+        /* Buttons */
+        .btn { display: flex; align-items: center; justify-content: center; padding: 14px; margin-bottom: 12px; border: none; border-radius: 12px; color: white; font-weight: bold; cursor: pointer; transition: 0.3s; width: 100%; font-size: 15px; }
+        .btn:active { transform: scale(0.98); }
+        .dana { background: var(--dana); }
+        .gopay { background: var(--gopay); }
+        .ovo { background: var(--ovo); }
+
+        /* Toast Notification */
+        #toast { visibility: hidden; min-width: 200px; background-color: #333; color: #fff; text-align: center; border-radius: 10px; padding: 10px; position: fixed; z-index: 1; bottom: 30px; font-size: 14px; }
+        #toast.show { visibility: visible; animation: fadein 0.5s, fadeout 0.5s 2.5s; }
+        @keyframes fadein { from {bottom: 0; opacity: 0;} to {bottom: 30px; opacity: 1;} }
+        @keyframes fadeout { from {bottom: 30px; opacity: 1;} to {bottom: 0; opacity: 0;} }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <img src="https://via.placeholder.com/90" alt="Logo Store" class="profile-img">
+    <h2>Tomura Store</h2>
+    <p style="color: #777; font-size: 14px;">Silakan selesaikan pembayaran Anda</p>
+
+    <div class="amount-box">
+        <label>Nominal Pembayaran (Rp)</label>
+        <input type="number" id="nominal" placeholder="Contoh: 50000">
+    </div>
+
+    <div class="qris-container">
+        <img src="https://via.placeholder.com/300x400?text=QRIS+KAMU+DISINI" alt="QRIS">
+        <div class="qris-label">SCAN QRIS DI ATAS</div>
+    </div>
+
+    <button class="btn dana" onclick="copyAndAlert('083827963304', 'DANA')">Bayar via DANA</button>
+    <button class="btn gopay" onclick="copyAndAlert('083827963304', 'GoPay')">Bayar via GoPay</button>
+    <button class="btn ovo" onclick="copyAndAlert('083827963304', 'OVO')">Bayar via OVO</button>
+
+    <p style="font-size: 11px; color: #bbb; margin-top: 15px;">Klik tombol untuk menyalin nomor otomatis</p>
+</div>
+
+<div id="toast">Nomor tersalin!</div>
+
+<script>
+    function copyAndAlert(number, platform) {
+        // Salin nomor ke clipboard
+        navigator.clipboard.writeText(number).then(() => {
+            const toast = document.getElementById("toast");
+            toast.innerText = "Nomor " + platform + " Tersalin!";
+            toast.className = "show";
+            
+            // Hilangkan notifikasi setelah 3 detik
+            setTimeout(function(){ toast.className = toast.className.replace("show", ""); }, 3000);
+        });
+    }
+</script>
+
+</body>
+</html>
+
