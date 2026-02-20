@@ -8,8 +8,8 @@
         :root {
             --neon-blue: #00f3ff;
             --neon-pink: #ff00ff;
-            --bg-dark: #0a0a0c;
-            --card-bg: rgba(20, 20, 25, 0.8);
+            --bg-dark: #050505;
+            --card-bg: rgba(15, 15, 20, 0.9);
             --dana: #008ced;
             --gopay: #00aa13;
             --ovo: #4c2a86;
@@ -18,223 +18,168 @@
         body {
             background-color: var(--bg-dark);
             background-image: 
-                radial-gradient(circle at 10% 20%, rgba(0, 243, 255, 0.05) 0%, transparent 40%),
-                radial-gradient(circle at 90% 80%, rgba(255, 0, 255, 0.05) 0%, transparent 40%);
-            font-family: 'Segoe UI', Roboto, sans-serif;
+                linear-gradient(0deg, transparent 24%, rgba(0, 243, 255, .05) 25%, rgba(0, 243, 255, .05) 26%, transparent 27%, transparent 74%, rgba(0, 243, 255, .05) 75%, rgba(0, 243, 255, .05) 76%, transparent 77%, transparent),
+                linear-gradient(90deg, transparent 24%, rgba(0, 243, 255, .05) 25%, rgba(0, 243, 255, .05) 26%, transparent 27%, transparent 74%, rgba(0, 243, 255, .05) 75%, rgba(0, 243, 255, .05) 76%, transparent 77%, transparent);
+            background-size: 50px 50px;
+            font-family: 'Courier New', Courier, monospace;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
             margin: 0;
             color: white;
-            overflow-x: hidden;
-        }
-
-        /* Grid Background Effect */
-        body::before {
-            content: "";
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), 
-                        linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
-            background-size: 100% 4px, 3px 100%;
-            pointer-events: none;
-            z-index: 10;
         }
 
         .card {
             width: 100%;
             max-width: 380px;
             background: var(--card-bg);
-            backdrop-filter: blur(15px);
-            border: 1px solid rgba(0, 243, 255, 0.3);
+            border: 2px solid var(--neon-blue);
             padding: 30px;
-            border-radius: 20px;
+            border-radius: 5px;
             text-align: center;
             position: relative;
-            box-shadow: 0 0 20px rgba(0, 243, 255, 0.1);
-            z-index: 5;
+            box-shadow: 0 0 20px rgba(0, 243, 255, 0.2), inset 0 0 10px rgba(0, 243, 255, 0.1);
         }
 
-        /* Profile Neon */
-        .profile-wrapper {
-            position: relative;
-            width: 110px;
-            height: 110px;
-            margin: 0 auto 15px;
-        }
-
+        /* Header Cyber */
         .profile-img {
-            width: 100%;
-            height: 100%;
+            width: 100px;
+            height: 100px;
             border-radius: 50%;
             object-fit: cover;
-            border: 2px solid var(--neon-blue);
-            box-shadow: 0 0 15px var(--neon-blue);
+            border: 2px solid var(--neon-pink);
+            box-shadow: 0 0 15px var(--neon-pink);
+            margin-bottom: 15px;
         }
 
         h2 {
-            margin: 10px 0 5px;
-            font-size: 26px;
-            text-transform: uppercase;
-            letter-spacing: 3px;
+            margin: 0;
+            font-size: 28px;
+            letter-spacing: 4px;
             color: var(--neon-blue);
-            text-shadow: 0 0 10px var(--neon-blue);
+            text-shadow: 2px 2px black, 0 0 10px var(--neon-blue);
         }
 
         .subtitle {
-            font-size: 12px;
-            color: #aaa;
-            letter-spacing: 1px;
+            font-size: 10px;
+            color: #666;
             margin-bottom: 25px;
-        }
-
-        /* QRIS Neon Box */
-        .qris-box {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid var(--neon-pink);
-            border-radius: 15px;
-            padding: 15px;
-            margin-bottom: 15px;
-            box-shadow: inset 0 0 15px rgba(255, 0, 255, 0.2);
-        }
-
-        .qris-box img {
-            width: 100%;
-            filter: brightness(1.1) contrast(1.1);
-            border-radius: 8px;
-        }
-
-        .btn-download {
-            display: inline-block;
-            background: transparent;
-            color: var(--neon-pink);
-            border: 1px solid var(--neon-pink);
-            padding: 10px 20px;
-            border-radius: 5px;
-            text-decoration: none;
-            font-size: 13px;
-            font-weight: bold;
             text-transform: uppercase;
-            transition: 0.3s;
-            margin-bottom: 25px;
         }
 
-        .btn-download:hover {
+        /* QRIS Frame - Sharp & HD */
+        .qris-frame {
+            background: white;
+            padding: 10px;
+            border: 1px solid var(--neon-blue);
+            margin-bottom: 15px;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+        }
+
+        .qris-frame img {
+            width: 100%;
+            display: block;
+            /* Memastikan gambar tetap tajam */
+            image-rendering: -webkit-optimize-contrast;
+            image-rendering: crisp-edges;
+        }
+
+        .download-btn {
+            display: block;
             background: var(--neon-pink);
             color: white;
-            box-shadow: 0 0 20px var(--neon-pink);
+            padding: 10px;
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: bold;
+            margin-bottom: 30px;
+            clip-path: polygon(10% 0, 100% 0, 90% 100%, 0 100%);
         }
 
-        /* Buttons List */
+        /* Payment Buttons */
         .payment-list { text-align: left; }
-        .label-cyber {
-            font-size: 10px;
-            color: var(--neon-blue);
-            margin-bottom: 10px;
-            display: block;
-            font-weight: bold;
-        }
+        .cyber-label { font-size: 9px; color: var(--neon-blue); margin-bottom: 5px; display: block; }
 
         .copy-btn {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 14px 20px;
-            margin-bottom: 12px;
-            border: none;
-            border-radius: 10px;
+            padding: 12px 15px;
+            margin-bottom: 10px;
+            border: 1px solid rgba(0, 243, 255, 0.3);
+            background: rgba(0, 0, 0, 0.5);
             color: white;
-            font-weight: bold;
             cursor: pointer;
             width: 100%;
-            background: rgba(255, 255, 255, 0.1);
-            border-left: 4px solid transparent;
             transition: 0.3s;
         }
 
-        .dana { border-color: var(--dana); }
-        .gopay { border-color: var(--gopay); }
-        .ovo { border-color: var(--ovo); }
-
         .copy-btn:hover {
-            background: rgba(255, 255, 255, 0.2);
-            transform: translateX(5px);
-        }
-
-        .action-tag {
-            font-size: 9px;
-            background: rgba(255, 255, 255, 0.15);
-            padding: 4px 8px;
-            border-radius: 4px;
-        }
-
-        /* Toast Cyber */
-        #toast {
-            visibility: hidden;
             background: var(--neon-blue);
             color: black;
-            font-weight: bold;
-            padding: 12px 25px;
-            border-radius: 5px;
+            box-shadow: 0 0 15px var(--neon-blue);
+        }
+
+        .tag { font-size: 9px; border: 1px solid currentColor; padding: 2px 5px; }
+
+        /* Toast */
+        #toast {
+            visibility: hidden;
             position: fixed;
-            bottom: 40px;
+            bottom: 30px;
             left: 50%;
             transform: translateX(-50%);
-            box-shadow: 0 0 20px var(--neon-blue);
+            background: var(--neon-pink);
+            color: white;
+            padding: 10px 20px;
+            font-size: 12px;
+            font-weight: bold;
+            z-index: 100;
         }
-
-        #toast.show { visibility: visible; animation: glitch 0.3s infinite; }
-
-        @keyframes glitch {
-            0% { transform: translate(-50%, -2px); }
-            50% { transform: translate(-50%, 2px); }
-            100% { transform: translate(-50%, 0); }
-        }
+        #toast.show { visibility: visible; animation: blink 0.2s infinite; }
+        @keyframes blink { 0% { opacity: 1; } 50% { opacity: 0.7; } 100% { opacity: 1; } }
     </style>
 </head>
 <body>
 
 <div class="card">
-    <div class="profile-wrapper">
-        <img src="https://i.ibb.co/svqJsGJF/1000512946.jpg" alt="Logo" class="profile-img">
-    </div>
+    <img src="https://i.ibb.co/LhqmB6P/1000512946.jpg" alt="Logo" class="profile-img">
     
-    <h2>Brann STORE</h2>
-    <div class="subtitle">PROTOCOL: SECURE_PAYMENT_v2.0</div>
+    <h2>BRANN STORE</h2>
+    <div class="subtitle">SYSTEM STATUS: ENCRYPTED</div>
 
-    <div class="qris-box">
-        <img src="https://i.ibb.co/XrgfZ6JY/1000576110.jpg" alt="QRIS Brann Store">
-        <div style="margin-top:10px; font-size:10px; color:var(--neon-pink); font-weight:bold; letter-spacing: 2px;">SCAN TO EXECUTE</div>
+    <div class="qris-frame">
+        <img src="https://i.ibb.co/N2pS8Mh/1000576110.jpg" alt="QRIS Brann Store">
     </div>
 
-    <a href="https://i.ibb.co/XrgfZ6JY/1000576110.jpg" target="_blank" class="btn-download">
-        [ SAVE_QRIS_DATA ]
+    <a href="https://i.ibb.co/N2pS8Mh/1000576110.jpg" target="_blank" class="download-btn">
+        DOWNLOAD_DATA.ZIP
     </a>
 
     <div class="payment-list">
-        <span class="label-cyber">> ACCESS_CODE: 083827963304</span>
-        <button class="copy-btn dana" onclick="copyNum('083827963304', 'DANA')">
-            <span>DANA_SYSTEM</span> <span class="action-tag">COPY</span>
+        <span class="cyber-label">> ID_LINK: 083827963304</span>
+        <button class="copy-btn" onclick="copyNum('083827963304', 'DANA')">
+            <span>DANA_V1</span> <span class="tag">COPY</span>
         </button>
-        <button class="copy-btn gopay" onclick="copyNum('083827963304', 'GoPay')">
-            <span>GOPAY_NODE</span> <span class="action-tag">COPY</span>
+        <button class="copy-btn" onclick="copyNum('083827963304', 'GOPAY')">
+            <span>GOPAY_V1</span> <span class="tag">COPY</span>
         </button>
-        <button class="copy-btn ovo" onclick="copyNum('083827963304', 'OVO')">
-            <span>OVO_NETWORK</span> <span class="action-tag">COPY</span>
+        <button class="copy-btn" onclick="copyNum('083827963304', 'OVO')">
+            <span>OVO_V1</span> <span class="tag">COPY</span>
         </button>
     </div>
 </div>
 
-<div id="toast">ID_COPIED_SUCCESSFULLY</div>
+<div id="toast">ACCESS_COPIED_TO_CLIPBOARD</div>
 
 <script>
     function copyNum(num, p) {
         navigator.clipboard.writeText(num);
         const t = document.getElementById("toast");
-        t.innerText = "DATA " + p + " COPIED!";
+        t.innerText = "LINK " + p + " SECURED!";
         t.className = "show";
-        setTimeout(() => { t.className = ""; }, 2500);
+        setTimeout(() => { t.className = ""; }, 2000);
     }
 </script>
 
